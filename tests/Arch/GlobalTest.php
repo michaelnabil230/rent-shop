@@ -12,5 +12,6 @@ arch('http helpers')
         'App\Http',
         'App\Rules',
         'App\Livewire',
+        'App\Filament',
         'App\Traits\SendToasts',
     ]);

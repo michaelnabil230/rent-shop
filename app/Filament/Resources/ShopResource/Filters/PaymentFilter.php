@@ -40,12 +40,19 @@ final class PaymentFilter extends BaseFilter
      */
     public function apply(Builder $builder, array $data = []): Builder
     {
-        $fromDate = $data['from_date'] ?? null;
-        $toDate = $data['to_date'] ?? null;
-
         $args = [
             'payments',
-            fn (Builder $builder): Builder => $this->whereBetweenDate($builder, $fromDate, $toDate),
+            function (Builder $builder) use ($data): Builder {
+                $fromDate = $data['from_date'] ?? null;
+
+                $toDate = $data['to_date'] ?? null;
+
+                if ($fromDate && $toDate) {
+                    return $builder->whereBetween('date', [$fromDate, $toDate]);
+                }
+
+                return $builder;
+            },
         ];
 
         return match ($data['payment_status']) {
@@ -53,18 +60,5 @@ final class PaymentFilter extends BaseFilter
             '0' => $builder->whereDoesntHave(...$args),
             default => $builder
         };
-    }
-
-    /**
-     * @param  Builder<Shop>  $builder
-     * @return Builder<Shop>
-     */
-    protected function whereBetweenDate(Builder $builder, ?string $fromDate, ?string $toDate): Builder
-    {
-        if ($fromDate && $toDate) {
-            return $builder->whereBetween('date', [$fromDate, $toDate]);
-        }
-
-        return $builder;
     }
 }
