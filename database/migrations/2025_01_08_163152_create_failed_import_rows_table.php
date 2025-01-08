@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table): void {
+        Schema::create('failed_import_rows', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('shop_id')->constrained()->cascadeOnDelete();
-            $table->string('reference_number');
-            $table->decimal('amount', 10, 2);
-            $table->date('date');
-            $table->longText('notes')->nullable();
+            $table->json('data');
+            $table->foreignId('import_id')->constrained()->cascadeOnDelete();
+            $table->text('validation_error')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('failed_import_rows');
     }
 };
