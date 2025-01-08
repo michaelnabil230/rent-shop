@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\ShopResource\Filters;
 
+use App\Models\Shop;
 use Filament\Forms;
 use Filament\Tables\Filters\BaseFilter;
 use Illuminate\Database\Eloquent\Builder;
@@ -32,6 +33,11 @@ final class PaymentFilter extends BaseFilter
         ]);
     }
 
+    /**
+     * @param  Builder<Shop>  $builder
+     * @param  array<string, mixed>  $data
+     * @return Builder<Shop>
+     */
     public function apply(Builder $builder, array $data = []): Builder
     {
         $fromDate = $data['from_date'] ?? null;
@@ -49,6 +55,10 @@ final class PaymentFilter extends BaseFilter
         };
     }
 
+    /**
+     * @param  Builder<Shop>  $builder
+     * @return Builder<Shop>
+     */
     protected function whereBetweenDate(Builder $builder, ?string $fromDate, ?string $toDate): Builder
     {
         if ($fromDate && $toDate) {

@@ -17,7 +17,7 @@ enum ShopStatus: string implements HasLabel
 
     case NOT_ACTIVE = 'not_active';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return match ($this) {
             self::PENDING => 'Pending',
