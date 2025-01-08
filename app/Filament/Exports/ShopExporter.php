@@ -33,7 +33,8 @@ final class ShopExporter extends Exporter
             ExportColumn::make('tenant_no'),
             ExportColumn::make('tenant_name'),
             ExportColumn::make('activity'),
-            ExportColumn::make('status'),
+            ExportColumn::make('status')
+                ->state(fn (Shop $shop): string => $shop->status->getLabel()),
             ExportColumn::make('created_at'),
             ExportColumn::make('updated_at'),
         ];
