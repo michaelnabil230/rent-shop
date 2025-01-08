@@ -6,6 +6,7 @@ namespace App\Filament\Resources;
 
 use App\Enums\ShopStatus;
 use App\Filament\Exports\ShopExporter;
+use App\Filament\Resources\ShopResource\Filters\PaymentFilter;
 use App\Filament\Resources\ShopResource\Pages;
 use App\Models\Shop;
 use Filament\Forms;
@@ -13,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 final class ShopResource extends Resource
 {
@@ -105,7 +107,29 @@ final class ShopResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('created_at')
+                    ->form([
+                        Forms\Components\DatePicker::make('date_from')
+                            ->native(false)
+                            ->placeholder('Y-m-d')
+                            ->date(),
+                        Forms\Components\DatePicker::make('date_to')
+                            ->native(false)
+                            ->placeholder('Y-m-d')
+                            ->date(),
+                    ])
+                    ->query(function (Builder $builder, array $data): Builder {
+                        return $builder->when(
+                            count(array_filter($data)) === 2,
+                            fn (Builder $builder): Builder => $builder->whereBetween('created_at', [$data['date_from'], $data['date_to']]),
+                        );
+                    }),
+
+                Tables\Filters\SelectFilter::make('status')
+                    ->options(ShopStatus::class)
+                    ->native(false),
+
+                PaymentFilter::make('payment'),
             ])
             ->actions([
                 Tables\Actions\Action::make('View Payments')
