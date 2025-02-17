@@ -10,27 +10,27 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "filament/filament": "v3.2.132",
-        "laravel/framework": "v11.37.0",
-        "laravel/telescope": "v5.2.6",
+        "filament/filament": "v3.2.140",
+        "laravel/framework": "v11.42.1",
+        "laravel/telescope": "v5.5.0",
         "maatwebsite/excel": "^3.1.62",
         "pinkary-project/type-guard": "v0.1.0",
         "predis/predis": "v2.3.0",
-        "laravel/tinker": "v2.10.0"
+        "laravel/tinker": "v2.10.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "v3.14.10",
-        "doctrine/dbal": "^4.2.1",
+        "doctrine/dbal": "^4.2.2",
         "fakerphp/faker": "v1.24.1",
-        "larastan/larastan": "v3.0.2",
-        "laravel/pail": "v1.2.1",
-        "laravel/pint": "v1.19.0",
+        "larastan/larastan": "v3.0.4",
+        "laravel/pail": "v1.2.2",
+        "laravel/pint": "v1.20.0",
         "mockery/mockery": "^1.6.12",
-        "nunomaduro/collision": "v8.5.0",
-        "pestphp/pest": "v3.7.1",
-        "pestphp/pest-plugin-laravel": "v3.0.0",
-        "pestphp/pest-plugin-type-coverage": "v3.2.3",
-        "rector/rector": "^2.0.6"
+        "nunomaduro/collision": "v8.6.1",
+        "pestphp/pest": "v3.7.4",
+        "pestphp/pest-plugin-laravel": "v3.1.0",
+        "pestphp/pest-plugin-type-coverage": "v3.3.0",
+        "rector/rector": "^2.0.9"
     },
     "autoload": {
         "psr-4": {
